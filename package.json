@@ -1,5 +1,5 @@
 {
-  "name": "notion.js",
+  "name": "notion-sdk.js",
   "version": "1.0.0",
   "description": "A powerful 🔥  NodeJS API Wrapper for the Notion API.",
   "main": "./src/index.js",
@@ -24,6 +24,8 @@
   },
   "homepage": "https://github.com/DisGroup-Development/notion.js#readme",
   "dependencies": {
-    "node-fetch": "^3.2.0"
+    "node-fetch": "^3.2.0",
+    "typedoc": "^0.22.11",
+    "typescript": "^4.5.5"
   }
 }
