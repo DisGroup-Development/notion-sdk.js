@@ -1,7 +1,8 @@
 const Base = require('./Base');
 const Constants = require('../util/Constants');
-const Cover = require('./Cover');
-const Icon = require('./Icon');
+const Emoji = require('./Emoji');
+const File = require('./File');
+const PageProperties = require('./PageProperties');
 
 /**
  * The Page class
@@ -25,7 +26,7 @@ class Page extends Base {
 
         /**
          * The object of the page
-         * @type {String} object
+         * @type {Constants.Objects} object
          */
         this.object = Constants.Objects.UNKNOWN
 
@@ -55,9 +56,9 @@ class Page extends Base {
 
             /**
              * The cover of the page
-             * @type {?Cover}
+             * @type {?File}
              */
-            this.cover = new Cover(data?.cover);
+            this.cover = new File(data?.cover);
 
         };
 
@@ -75,9 +76,26 @@ class Page extends Base {
 
             /**
              * The icon of the page
-             * @type {?Icon}
+             * @type {?File|?Emoji|null}
              */
-            this.icon = new Icon(data?.icon);
+            this.icon = null;
+
+            switch(data?.icon?.type) {
+
+                case Constants.IconTypes.EMOJI:
+
+                    this.icon = new Emoji(data?.icon);
+
+                    break;
+
+                case Constants.IconTypes.EXTERNAL:
+                case Constants.IconTypes.FILE:
+
+                    this.icon = new File(data?.icon);
+
+                    break;
+
+            }
 
         }
 
@@ -95,7 +113,7 @@ class Page extends Base {
 
             switch(data?.object) {
 
-                case 'page':
+                case Constants.Objects.PAGE:
 
                     this.object = Constants.Objects.PAGE;
 
@@ -115,13 +133,13 @@ class Page extends Base {
 
             /**
              * The type of the parent
-             * @type {?String}
+             * @type {?Constants.ParentTypes}
              */
             this.parentType = Constants.ParentTypes.UNKNOWN;
 
             switch(data?.parent?.type) {
 
-                case 'database_id':
+                case Constants.ParentTypes.DATABASE:
 
                     this.parentType = Constants.ParentTypes.DATABASE;
 
@@ -129,7 +147,7 @@ class Page extends Base {
 
                     break;
 
-                case 'page_id':
+                case Constants.ParentTypes.PAGE:
 
                     this.parentType = Constants.ParentTypes.PAGE;
 
@@ -137,15 +155,19 @@ class Page extends Base {
 
                     break;
 
-                case 'workspace':
+                case Constants.ParentTypes.WORKSPACE:
 
                     this.parentType = Constants.ParentTypes.WORKSPACE;
 
                     break;
 
-                default: break;
-
             }
+
+        };
+
+        if('properties' in data && typeof data?.properties === 'object') {
+
+            this.properties = new PageProperties(data?.properties);
 
         };
 

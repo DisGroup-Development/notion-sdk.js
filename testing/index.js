@@ -8,4 +8,4 @@ const client = new Notion.Client({ secret: Auth.Secret });
 // LIST client.users.list().then(async (R) => { console.log(R)});
 // ME client.users.me().then(async (R) => { console.log(R)});
 
-client.pages.get('c4e3935b04ec4df6a17a7b131511961d').then(async (R) => { console.log(R)});
+client.pages.get('85c60d3fa758479284a2599362ad206d').then(async (R) => { console.log(R.properties)});

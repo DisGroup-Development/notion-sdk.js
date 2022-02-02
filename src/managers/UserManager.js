@@ -57,7 +57,7 @@ class UserManager extends Base {
 
         return new Promise(async (resolve, reject) => {
 
-            const res = await this.client.rest.request("get", Endpoints.USERS, { query: 'page_size=' + ( options?.amount ? options.amount : '100' ) + ( options?.start ? `start_cursor=${options.start}` : '' ) });
+            const res = await this.client.rest.request("get", Endpoints.USERS, { query: 'page_size=' + ( options?.amount ? options.amount : '100' ) + ( options?.start ? `&start_cursor=${options.start}` : '' ) });
 
             const data = await res.json();
 

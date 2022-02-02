@@ -23,9 +23,9 @@ class User extends Base {
 
         /**
          * The object of the user
-         * @type {String} object
+         * @type {Constants.Objects} object
          */
-        this.object = ( data?.object && typeof data?.object === 'string' ? Constants.Objects.USER : Constants.Objects.UNKNOWN );
+        this.object = Constants.Objects.UNKNOWN;
 
         this._patch(data);
 
@@ -103,6 +103,20 @@ class User extends Base {
 
         }
 
+        if('object' in data && typeof data?.object === 'string') {
+
+            switch(data?.object) {
+
+                case Constants.Objects.USER:
+
+                    this.object = Constants.Objects.USER;
+
+                    break;
+
+            }
+
+        }
+
         if('person' in data && typeof data?.person === 'object') {
 
             if('email' in data?.person && typeof data?.person?.email === 'string') {
@@ -127,13 +141,13 @@ class User extends Base {
 
             switch(data?.type) {
 
-                case 'bot':
+                case Constants.UserTypes.BOT:
 
                     this.type = Constants.UserTypes.BOT;
 
                     break;
 
-                case 'person':
+                case Constants.UserTypes.PERSON:
 
                     this.type = Constants.UserTypes.PERSON;
 

@@ -5,9 +5,11 @@ const PageManager = require('./managers/PageManager');
 const UserManager = require('./managers/UserManager');
 
 const Base = require('./structures/Base');
-const Cover = require('./structures/Cover');
-const Icon = require('./structures/Icon');
+const Emoji = require('./structures/Emoji');
+const File = require('./structures/File');
 const Page = require('./structures/Page');
+const PageProperties = require('./structures/PageProperties');
+const Style = require('./structures/Style');
 const User = require('./structures/User');
 const UserList = require('./structures/UserList');
 
@@ -25,9 +27,11 @@ module.exports = {
     UserManager,
 
     Base,
-    Cover,
-    Icon,
+    Emoji,
+    File,
     Page,
+    PageProperties,
+    Style,
     User,
     UserList,
 

@@ -1,47 +1,60 @@
-const CoverTypes = {
-    EXTERNAL: "EXTERNAL",
-    FILE: "FILE",
-    UNKNOWN: "UNKNOWN"
-}
+const EmojiTypes = {
+    EMOJI: "emoji",
+    UNKNOWN: "unknown"
+};
+
+const FileTypes = {
+    EXTERNAL: "external",
+    FILE: "file",
+    UNKNOWN: "unknown"
+};
 
 const IconTypes = {
-    EMOJI: "EMOJI",
-    EXTERNAL: "EXTERNAL",
-    FILE: "FILE",
-    UNKNOWN: "UNKNOWN"
+    EMOJI: "emoji",
+    EXTERNAL: "external",
+    FILE: "file",
+    UNKNOWN: "unknown"
 };
 
 const Objects = {
-    BLOCK: "BLOCK",
-    DATABASE: "DATABASE",
-    PAGE: "PAGE",
-    UNKNOWN: "UNKNOWN",
-    USER: "USER"
+    BLOCK: "block",
+    DATABASE: "database",
+    PAGE: "page",
+    UNKNOWN: "unknown",
+    USER: "user"
 };
 
 const OwnerTypes = {
-    UNKNOWN: "UNKNOWN",
-    USER: "USER",
-    WORKSPACE: "WORKSPACE"
+    UNKNOWN: "unknown",
+    USER: "user",
+    WORKSPACE: "workspace"
+};
+
+const PageProperties = {
+    TEXT: "text",
+    TITLE: "title",
+    UNKNOWN: "unknown"
 };
 
 const ParentTypes = {
-    DATABASE: "DATABASE",
-    PAGE: "PAGE",
-    UNKNOWN: "UNKNOWN",
-    WORKSPACE: "WORKSPACE"
+    DATABASE: "database_id",
+    PAGE: "page_id",
+    UNKNOWN: "unknown",
+    WORKSPACE: "workspace"
 };
 
 const UserTypes = {
-    BOT: "BOT",
-    PERSON: "PERSON",
-    UNKNOWN: "UNKNOWN"
+    BOT: "bot",
+    PERSON: "person",
+    UNKNOWN: "unknown"
 };
 
 module.exports = {
 
-    CoverTypes,
+    EmojiTypes,
+    FileTypes,
     IconTypes,
+    PageProperties,
     ParentTypes,
     Objects,
     OwnerTypes,
