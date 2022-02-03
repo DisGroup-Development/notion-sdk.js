@@ -47,9 +47,10 @@ class UserManager extends Base {
 
     /**
      * Lists all users
+     * @param {ListOptions} options
      * @return {Promise<UserList>}
      */
-    list(options = {}) {
+    list(options) {
 
         if('amount' in options && typeof options?.amount !== 'number') throw new Error(Errors.AMOUNT_NOT_A_NUMBER);
         if('amount' in options && ( options.amount < 1 || options.amount > 100 )) throw new Error(Errors.AMOUNT_MUST_BE(1, 100));
@@ -67,6 +68,10 @@ class UserManager extends Base {
 
     }
 
+    /**
+     * Gets the client
+     * @returns {Promise<User>}
+     */
     me() {
 
         return new Promise(async (resolve, reject) => {

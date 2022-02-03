@@ -11,7 +11,7 @@ class Base {
 
         /**
          * The client
-         * @type {Client}
+         * @type {client}
          */
         this.client = client;
 
