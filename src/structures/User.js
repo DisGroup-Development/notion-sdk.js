@@ -1,19 +1,11 @@
-const Base = require('./Base');
 const Constants = require('../util/Constants');
 
 /**
  * The User class
- * @extends {Base}
  */
-class User extends Base {
+class User {
 
-    /**
-     * The Client
-     * @param {Client} client The Client
-     */
-    constructor(client, data) {
-
-        super(client);
+    constructor(data) {
 
         /**
          * The id of the user
@@ -34,7 +26,6 @@ class User extends Base {
     /**
      * Patches the user data
      * @param data
-     * @private
      * @async
      */
     async _patch(data) {
@@ -85,7 +76,7 @@ class User extends Base {
                      * The owner
                      * @type {User}
                      */
-                    this.user = new User(this.client, data?.bot?.owner?.user);
+                    this.user = new User(data?.bot?.owner?.user);
 
                 }
 

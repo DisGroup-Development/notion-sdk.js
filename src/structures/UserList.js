@@ -26,9 +26,8 @@ class UserList extends Base {
     }
 
     /**
-     * Patches the user data
+     * Patches the user list data
      * @param data
-     * @private
      * @async
      */
     async _patch(data) {

@@ -30,9 +30,8 @@ class File {
     }
 
     /**
-     * Patches the page data
+     * Patches the file data
      * @param data
-     * @private
      */
     _patch(data) {
 

@@ -9,7 +9,6 @@ const Emoji = require('./structures/Emoji');
 const File = require('./structures/File');
 const Page = require('./structures/Page');
 const PageProperties = require('./structures/PageProperties');
-const Style = require('./structures/Style');
 const User = require('./structures/User');
 const UserList = require('./structures/UserList');
 
@@ -31,7 +30,6 @@ module.exports = {
     File,
     Page,
     PageProperties,
-    Style,
     User,
     UserList,
 

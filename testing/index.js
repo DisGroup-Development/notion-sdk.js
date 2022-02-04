@@ -8,4 +8,8 @@ const client = new Notion.Client({ secret: Auth.Secret });
 // LIST client.users.list().then(async (R) => { console.log(R)});
 // ME client.users.me().then(async (R) => { console.log(R)});
 
-client.pages.get('85c60d3fa758479284a2599362ad206d').then(async (R) => { console.log(R)});
+// https://www.notion.so/finnley-hauptmann/Notion-SDK-JS-45e76132bb5244c081ccd7bd32e2e102
+
+//client.rest.request("get", Notion.Endpoints.PAGE('45e76132bb5244c081ccd7bd32e2e102')).then(async (R) => console.log(await R.json()))
+
+client.databases.get('a7737ff3570a47a6ac279895b8dc60ea').then(async (R) => console.log(R));

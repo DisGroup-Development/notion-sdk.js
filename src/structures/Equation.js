@@ -2,24 +2,24 @@ const Annotation = require('./Annotation');
 const Constants = require('../util/Constants');
 
 /**
- * The RichText class
+ * The Equation class
  */
-class RichText {
+class Equation {
 
     constructor(data) {
 
         /**
          * The type of the rich text
-         * @type {Constants.RichTextTypes.TEXT} type
+         * @type {Constants.RichTextTypes.EQUATION} type
          */
-        this.type = Constants.RichTextTypes.TEXT;
+        this.type = Constants.RichTextTypes.EQUATION;
 
         this._patch(data);
 
     }
 
     /**
-     * Patches the rich text data
+     * Patches the equation data
      * @param data
      */
     _patch(data) {
@@ -27,7 +27,7 @@ class RichText {
         if('annotations' in data && typeof data?.annotations === 'object') {
 
             /**
-             * The style of the text
+             * The style of the equation
              * @type {?Annotation} style
              */
             this.style = new Annotation(data?.annotations);
@@ -58,4 +58,4 @@ class RichText {
 
 }
 
-module.exports = RichText;
+module.exports = Equation;

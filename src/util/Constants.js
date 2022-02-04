@@ -28,6 +28,7 @@ const MentionTypes = {
 const Objects = {
     BLOCK: "block",
     DATABASE: "database",
+    ERROR: "error",
     PAGE: "page",
     UNKNOWN: "unknown",
     USER: "user"

@@ -1,14 +1,16 @@
 const BasePage = require('./BasePage');
 const Constants = require('../util/Constants');
 const Endpoints = require('../util/Endpoints');
+const Equation = require("./Equation");
 const Errors = require('../util/Errors');
-const PageProperties = require('./PageProperties');
+const Mention = require("./Mention");
+const RichText = require("./RichText");
 
 /**
- * The Page class
+ * The Database class
  * @extends {BasePage}
  */
-class Page extends BasePage {
+class Database extends BasePage {
 
     /**
      * The Client
@@ -27,20 +29,81 @@ class Page extends BasePage {
      * @param data
      * @async
      */
-     async _patch(data) {
+    async _patch(data) {
 
         await super._patch(data);
 
-        if('properties' in data && typeof data?.properties === 'object') {
+        if('title' in data && typeof data?.title === 'object') {
 
-            this.properties = new PageProperties(data?.properties);
+            if('title' in data?.title && typeof data?.title !== 'null') {
+
+                /**
+                 * The array of all page title segments
+                 * @type {Array<Equation|Mention|RichText>} titles
+                 */
+                this.titles = [];
+
+                if(data?.title?.title?.length > 0) {
+
+                    /**
+                     * The title of the page
+                     * @type {String}
+                     */
+                    this.title = "";
+
+                    data?.title?.title?.forEach((RawData) => {
+
+                        if('plain_text' in RawData && typeof RawData?.plain_text === 'string') {
+
+                            this.title = `${this.title + RawData.plain_text}`;
+
+                        }
+
+                        if('type' in RawData && typeof RawData?.type === 'string') {
+
+                            switch(RawData?.type) {
+
+                                case Constants.RichTextTypes.EQUATION:
+
+                                    this.titles.push(new Equation(RawData));
+
+                                    break;
+
+                                case Constants.RichTextTypes.MENTION:
+
+                                    this.titles.push(new Mention(RawData));
+
+
+                                    break;
+
+                                case Constants.RichTextTypes.TEXT:
+
+                                    this.titles.push(new RichText(RawData));
+
+                                    break;
+
+                                case Constants.RichTextTypes.UNKNOWN:
+
+                                    this.titles.push(RawData);
+
+                                    break;
+
+                            }
+
+                        };
+
+                    });
+
+                }
+
+            }
 
         };
 
     }
 
     /**
-     * Marks the page as archived
+     * Marks the database as archived
      * @param {Boolean} boolean
      * @return {Promise<Page>}
      */
@@ -50,7 +113,7 @@ class Page extends BasePage {
 
         return new Promise(async (resolve, reject) => {
 
-            this.client.rest.request("patch", Endpoints.PAGE(this.id), {
+            this.client.rest.request("patch", Endpoints.DATABASE(this.id), {
 
                 body: {
 
@@ -62,7 +125,7 @@ class Page extends BasePage {
 
                 await RawData.json();
 
-                resolve(new Page(this.client, RawData));
+                resolve(new Database(this.client, RawData));
 
             });
 
@@ -76,7 +139,7 @@ class Page extends BasePage {
      */
 
     /**
-     * Sets the cover for the page
+     * Sets the database for the page
      * @param {CoverData} data
      * @return {Promise<Page>}
      */
@@ -90,7 +153,7 @@ class Page extends BasePage {
 
         return new Promise(async (resolve, reject) => {
 
-            this.client.rest.request("patch", Endpoints.PAGE(this.id), {
+            this.client.rest.request("patch", Endpoints.DATABASE(this.id), {
 
                 body: {
 
@@ -109,7 +172,7 @@ class Page extends BasePage {
 
                 const data = await RawData.json();
 
-                resolve(new Page(this.client, data));
+                resolve(new Database(this.client, data));
 
             });
 
@@ -124,9 +187,9 @@ class Page extends BasePage {
      */
 
     /**
-     * Sets the icon for the page
+     * Sets the icon for the database
      * @param {IconData} data
-     * @return {Promise<Page>}
+     * @return {Promise<Database>}
      */
     async setIcon(data) {
 
@@ -140,7 +203,7 @@ class Page extends BasePage {
 
         return new Promise(async (resolve, reject) => {
 
-            this.client.rest.request("patch", Endpoints.PAGE(this.id), {
+            this.client.rest.request("patch", Endpoints.DATABASE(this.id), {
 
                 body: {
 
@@ -160,7 +223,7 @@ class Page extends BasePage {
 
                 const data = await RawData.json();
 
-                resolve(new Page(this.client, data));
+                resolve(new Database(this.client, data));
 
             });
 
@@ -170,4 +233,4 @@ class Page extends BasePage {
 
 }
 
-module.exports = Page;
+module.exports = Database;

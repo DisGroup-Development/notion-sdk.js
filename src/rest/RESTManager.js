@@ -1,6 +1,7 @@
 const Base = require('../structures/Base');
 const Fetch = import('node-fetch');
 const Errors = require('../util/Errors');
+const NotionError = require('../structures/NotionAPIError');
 
 /**
  * The REST manager
@@ -32,7 +33,7 @@ class RESTManager extends Base {
      * @typedef {Object} RequestOptions
      * @property {?{}} headers The headers of the request
      * @property {?{}} body The body of the request
-     * @property {?[{}]} query The query of the request
+     * @property {?String} query The query of the request
      */
 
     /**
@@ -48,18 +49,19 @@ class RESTManager extends Base {
 
             const Request = await (await Fetch).default(`${this.client.options?.apiURL}${this.client.options?.apiVersion}${route}` + ( options?.query ? `?${options.query}` : '' ), {
 
-                body: options?.body ?? null,
+                body: options?.body ? JSON.stringify(options?.body) : null,
                 headers: options?.headers ?? {
 
                     "Authorization": this.getAuth(),
                     "Content-Type": "application/json",
-                    "Notion-Version": this.client.options?.version,
-                    "page_size": 1
+                    "Notion-Version": this.client.options?.version
 
                 },
                 method: method
 
             });
+
+            if(Request.status !== 200) throw new NotionError(await Request.json());
 
             resolve(Request);
 

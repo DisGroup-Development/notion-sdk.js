@@ -1,9 +1,8 @@
-const Constants = require('../util/Constants');
 
 /**
- * The Style class
+ * The Annotation class
  */
-class Style {
+class Annotation {
 
     constructor(data) {
 
@@ -42,9 +41,8 @@ class Style {
          * @type {Boolean} underline
          */
         this.underline = data?.underline ?? false;
-
     }
 
 }
 
-module.exports = Style;
+module.exports = Annotation;

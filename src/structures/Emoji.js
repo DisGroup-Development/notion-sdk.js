@@ -24,9 +24,8 @@ class Emoji {
     }
 
     /**
-     * Patches the page data
+     * Patches the emoji data
      * @param data
-     * @private
      */
     _patch(data) {
 
